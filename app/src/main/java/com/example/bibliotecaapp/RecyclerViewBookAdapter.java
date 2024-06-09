@@ -75,16 +75,15 @@ public class RecyclerViewBookAdapter extends RecyclerView.Adapter<RecyclerView.V
                 @Override
                 public void onClick(View v) {
                     if (mOnItemClickListener!= null) {
+                        // Llamar al método onItemClick del listener
                         mOnItemClickListener.onItemClick(v, position, mBookList.get(position), true);
                     }
                 }
             });
 
             if (book.isAvailable()) {
-//                layout.setBackgroundColor(mContext.getResources().getColor(R.color.green));
                 available.setTextColor(mContext.getResources().getColor(R.color.green));
             } else {
-//                layout.setBackgroundColor(mContext.getResources().getColor(R.color.red));
                 available.setTextColor(mContext.getResources().getColor(R.color.red));
             }
 

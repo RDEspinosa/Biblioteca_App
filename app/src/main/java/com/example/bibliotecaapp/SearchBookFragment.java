@@ -63,6 +63,48 @@ public class SearchBookFragment extends Fragment {
         // Realizar la búsqueda de libros y mostrar los resultados
         searchAndUpdateAdapter(""); // Búsqueda inicial sin filtro
 
+        // Configurar el adaptador para manejar clics
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            // Método para manejar el clic en el adaptador
+            @Override
+            public void onItemClick(View v, int index, Object item, boolean isChecked) {
+                // Verificar si el objeto es una instancia de Book
+                if (item instanceof Book) {
+                    Book clickedBook = (Book) item;
+
+                    // Realizar acciones basadas en el estado del libro
+                    if (clickedBook.isAvailable()) {
+                        // El libro está disponible para prestar
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("¿Prestar el libro: " + clickedBook.getTitle() + "?");
+                        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Cambiar el estado del libro a prestado
+                                clickedBook.setAvailable(false);
+
+                                // Notificar al adaptador que los datos han cambiado
+                                adapter.notifyDataSetChanged();
+
+                                // Mostrar un mensaje de confirmación o realizar otras acciones necesarias
+                                Toast.makeText(getContext(), "Libro prestado: " + clickedBook.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.create().show();
+                    } else {
+                        // El libro ya está prestado
+                        Toast.makeText(getContext(), "El libro ya está prestado: " + clickedBook.getTitle(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
         return view;
     }
 
