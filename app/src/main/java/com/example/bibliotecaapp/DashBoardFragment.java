@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +43,27 @@ public class DashBoardFragment extends Fragment {
         textView = view.findViewById(R.id.textView);
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        List<Book> books = MainActivity.books;
+        // Crear un grafo simple
+        Graph<Book, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-        books1 = new ArrayList<Book>();
+        // Agregar nodos (libros) al grafo
+        for (Book book : MainActivity.books) {
+            graph.addVertex(book);
+        }
 
-        for (Book book : books) {
-            if (!book.isAvailable()){
+        // Agregar aristas (relaciones) entre libros del mismo autor
+        for (Book book1 : MainActivity.books) {
+            for (Book book2 : MainActivity.books) {
+                if (!book1.equals(book2) && book1.getAuthor().equals(book2.getAuthor())) {
+                    graph.addEdge(book1, book2);
+                }
+            }
+        }
+
+        // Obtener los libros prestados (vértices conectados en el grafo)
+        books1 = new ArrayList<>();
+        for (Book book : MainActivity.books) {
+            if (!book.isAvailable()) {
                 books1.add(book);
             }
         }
