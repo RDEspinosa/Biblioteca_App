@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Biblioteca App</string>
+    <string name="user_title">Usuario</string>
+    <string name="password_title">Contraseña</string>
+    <string name="button_login_title">ingresar</string>
+    <string name="login_title">biblioteca virtual</string>
+    <string name="welcome_text">Bienvenido</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="register">Registrar libro</string>
+    <string name="listitem">ListItem</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_user">Libros prestados</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="serach_title">Buscar</string>
+    <string name="name_title">Nombre</string>
+    <string name="register_button">registrar</string>
+    <string name="logout_title">Cerrar sesión</string>
+    <string name="back_title">atrás</string>
+    <string name="title_title">Título</string>
+    <string name="author_title">Autor</string>
+    <string name="year_title">Año</string>
+    <string name="isbn_title">ISBN</string>
+    <string name="description_title">Descripción</string>
+</resources>
